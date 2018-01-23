@@ -8,7 +8,7 @@ export default {
   props: ['name', 'geoCode'],
   data: function () {
     return {
-      mapName: this.name + "-map",
+      mapName: this.name + '-map',
       map: null,
       marker: null
     }
@@ -18,10 +18,10 @@ export default {
       this.createMap()
     }
   },
-  methods:{
+  methods: {
     createMap () {
       const element = document.getElementById(this.mapName)
-      const uluru = {lat: this.geoCode.latitude, lng: this.geoCode.longitude};
+      const uluru = {lat: this.geoCode.latitude, lng: this.geoCode.longitude}
       const options = {
         zoom: 14,
         center: uluru

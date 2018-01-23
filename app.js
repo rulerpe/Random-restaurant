@@ -6,10 +6,11 @@ var bodyParser = require('body-parser');
 
 var restaurant = require('./routes/restaurant');
 var app = express();
+var mlab = 'mongodb://rulerpe:ddddffff1990@ds111568.mlab.com:11568/random-restaurant'
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost/random-restaurant', { promiseLibrary: require('bluebird') })
+mongoose.connect(mlab, { promiseLibrary: require('bluebird') })
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 

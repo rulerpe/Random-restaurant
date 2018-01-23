@@ -15,22 +15,19 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   Restaurant.create(req.body)
   .then(function (data){
-    console.log(data)
     var config = {
       headers: {
         'withCredentials': true,
         'Authorization': 'Bearer ' + apiKey
       }
     }
-    var api = `https://api.yelp.com/v3/businesses/search?limit=20&sort_by=rating&location=${data.zipCode}`
+    var api = `https://api.yelp.com/v3/businesses/search?limit=20&location=${data.zipCode}`
     api = `${api}&term=restaurants ${data.type}`
     api = data.delivery ? `${api} delivery` : api
     api = data.price ? `${api}&price=${data.price}` : api
     api = encodeURI(api)
-    console.log('the api',api)
     axios.get(api, config)
       .then(function (response) {
-        console.log(response.data)
         res.json(response.data);
       })
       .catch(function (error) {
@@ -38,7 +35,6 @@ router.post('/', function(req, res, next) {
       })
   })
   .catch(function(err){
-    console.log(err)
     return next(err);
   })
   

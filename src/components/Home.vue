@@ -66,6 +66,9 @@
                 <div v-if="selected.delivery" class="text-xs-left">
                   <v-icon class="primery--text">check_circle</v-icon><span>Delivery</span>
                 </div>
+                <div class="text-xs-left">
+                  <span>{{selected.price}}</span>
+                </div>
                 <div class="text-xs-left mt-2">
                   <span class="body-2">Phone: </span><span>{{selected.phone}}</span> <br>
                   <span class="body-2">Address: </span><span v-for="(loc, index) in selected.location.display_address" :key="index">{{loc}} </span>
@@ -94,7 +97,6 @@
 
 <script>
 import axios from 'axios'
-import { mockData } from '../mock'
 export default {
   name: 'Home',
   data () {
@@ -127,31 +129,22 @@ export default {
   },
   methods: {
     getRandomNum (max) {
-      console.log(max)
-      return Math.floor(Math.random() * Math.floor(parseInt(max -1)))
+      return Math.floor(Math.random() * Math.floor(parseInt(max - 1)))
     },
     selectRestrant () {
       this.findRestrant = false
       this.loading = true
       this.resultDisplay = false
-      console.log(this.resultData.length)
-      var n = this.getRandomNum (this.resultData.length)
-      console.log(n)
+      var n = this.getRandomNum(this.resultData.length)
       this.selected = this.resultData[n]
       var rating = {}
       rating.full = parseInt(this.resultData[n].rating)
-      rating.half = this.resultData[n].rating % 1 ? true : false
+      rating.half = this.resultData[n].rating % 1
       this.selected.customRating = rating
       this.selected.delivery = this.selected.transactions.includes('delivery')
       this.findRestrant = false
       this.loading = false
       this.resultDisplay = true
-    },
-    initMap () {
-      this.map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 8
-      });
     },
     find () {
       this.findRestrant = false
@@ -162,7 +155,7 @@ export default {
         .then(function (response) {
           x.resultData = response.data.businesses
           x.selectRestrant()
-        },)
+        })
         .catch(function (error) {
           console.log(error)
           x.findRestrant = true
