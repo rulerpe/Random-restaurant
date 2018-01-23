@@ -1,20 +1,20 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+//var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var restaurant = require('./routes/restaurant');
 var app = express();
-var mlab = 'mongodb://rulerpe:ddddffff1990@ds111568.mlab.com:11568/random-restaurant'
+//var mlab = 'mongodb://rulerpe:ddddffff1990@ds111568.mlab.com:11568/random-restaurant'
 
-var mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-mongoose.connect(mlab, { promiseLibrary: require('bluebird') })
-  .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));
+//var mongoose = require('mongoose');
+//mongoose.Promise = require('bluebird');
+//mongoose.connect(mlab, { promiseLibrary: require('bluebird') })
+//  .then(() =>  console.log('connection succesful'))
+//  .catch((err) => console.error(err));
 
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
