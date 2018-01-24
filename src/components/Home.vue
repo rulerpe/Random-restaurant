@@ -1,8 +1,14 @@
 <template>
   <v-container grid-list-md text-xs-center>
     <div id="findRestrant" v-if="findRestrant">
-      <h1 class="display-4">What's for dinner</h1>
-      <h3 class="headline">An app randomly pick a restaurant for you based on a few input from you. Hope this will save you some time on choosing what to eat</h3>
+      <div class="hidden-xs-only">
+        <h1 class="display-4">What's for dinner</h1>
+      <h3 class="headline">An app randomly picks a restaurant for you based on a few input. Hope this will save you some time on choosing what to eat</h3>
+      </div>
+      <div class="hidden-sm-and-up">
+        <h1 class="display-2">What's for dinner</h1>
+      <h3 class="subheading">An app randomly picks a restaurant for you based on a few input. Hope this will save you some time on choosing what to eat</h3>
+      </div>
       <v-form v-model="valid" ref="form" lazy-validation class="mt-3">
         <v-text-field
           label="ZipCode"
@@ -44,7 +50,7 @@
             <v-card-media :src="selected.image_url" height="200px">
               <v-container fill-height fluid>
                 <v-layout fill-height>
-                  <v-flex xs12 align-end flexbox class="text-sm-left">
+                  <v-flex xs12 align-end flexbox class="text-xs-left">
                     <v-btn @click="toHome" fab dark small color="primary">
                       <v-icon dark>chevron_left</v-icon>
                     </v-btn>
